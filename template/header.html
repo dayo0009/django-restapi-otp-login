@@ -1,0 +1,67 @@
+{% block header %}
+<div class="container">
+    <div class="row">
+        <div class="col-sm-12 col-md-10 col-lg-2 col-xl-2" style="">
+            <div class="col-sm-12 col-md-12 col-lg-10 col-xl-10" style="">
+                <a href="{% url 'home_page' %}" style="">
+                    <img src="../../media/badiiu2.png" class="img-thumbnail" style="border: 0;"
+                        alt="badiiu" width="120px" height="120px"  />
+                </a>
+            </div>
+            <div class="col-sm-4 col-md-4 col-lg-10 col-xl-10" style="text-align: center; margin-top: -23px">
+                <span class="" style="position: relative; margin-top: 10px; color: #008066;font-weight: bolder;
+            font-style: italic; font-size: 9px;">incomparable in existence</span>
+            </div>
+        </div>
+         <div class="col-sm-12 col-md-10 col-lg-4 col-xl-4" style="">
+             
+        </div>
+
+         <div class="col-sm-12 col-md-8 col-lg-6 col-xl-6" style="">
+            {% if request.user.is_authenticated %}
+             <div class="row" style="text-align: center">
+                 <div class="col-sm-12 col-md-8 col-lg-6 col-xl-6" style="border-right: 1px solid #095859;">
+
+                 </div>
+                 <div class="col-sm-12 col-md-10 col-lg-3 col-xl-3" style="border-right: 1px solid #095859;">
+                     <button type="button" class="header-link" style="font-weight: bold; border: none;
+                                    background-color:#fff; border-color: #095859;">
+                        <a href="{% url 'logout' %}" style="text-decoration: none;  color: #008066">
+                            Logout </a>
+                     </button>
+                 </div>
+                 <div class="col-sm-12 col-md-10 col-lg-3 col-xl-3" style="">
+
+                 </div>
+             </div>
+         </div>
+             {% else %}
+             <div class="col-sm-12 col-md-8 col-lg-6 col-xl-6" style="">
+             <div class="row" style="text-align: center">
+                 <div class="col-sm-12 col-md-8 col-lg-6 col-xl-6" style="border-right: 1px solid #095859;">
+                    <button type="button" class="header-link" style="font-weight: bold; border: none;
+                                    background-color:#fff; border-color: #095859;">
+                        <a href="{% url 'register' %}" style="text-decoration: none;  color: #008066">
+                            Register </a>
+                     </button>
+                 </div>
+                 <div class="col-sm-12 col-md-10 col-lg-3 col-xl-3" style="border-right: 1px solid #095859;">
+                     <button type="button" class="header-link" style="font-weight: bold; border: none;
+                                    background-color:#fff; border-color: #095859;">
+                        <a href="{% url 'login' %}" style="text-decoration: none;  color: #008066">
+                            Login </a>
+                     </button>
+                 </div>
+                 <div class="col-sm-12 col-md-10 col-lg-3 col-xl-3" style="">
+                    <button type="button" class="header-link" style="font-weight: bold; border: none;
+                                    background-color:#fff; border-color: #095859;">
+                        <a href="{% url 'login' %}" style="text-decoration: none;  color: #008066">
+                            Cart </a>
+                     </button>
+                 </div>
+             </div>
+             </div>
+            {% endif %}
+    </div>
+</div>
+{% endblock %}

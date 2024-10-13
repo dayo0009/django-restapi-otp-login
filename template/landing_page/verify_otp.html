@@ -1,0 +1,50 @@
+{% extends '../template.html' %}
+{% block title %} OTP Page  {% endblock title %}
+{% load rest_framework %}
+{% block header %}
+    {% include '../header.html' %}
+{% endblock header %}
+<p></p>
+{% block content %}
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12 col-md-10 col-lg-8 col-xl-10">
+      <h4>  Enter OTP send to your phone to continue </h4>
+   </div>
+   <div class="col-sm-12 col-md-10 col-lg-8 col-xl-10">
+     <ul>
+      <li> The process is to ensure your account is not compromised </li>
+    </ul>
+   </div>
+    <p></p>
+  </div>
+  <div class="row">
+    {% include '../message/messages.html' %}
+    <p></p>
+  </div>
+  <form method="POST" autocomplete="off">
+    {% csrf_token %}
+    <div class="row" style="text-align: center">
+      <div class="col-sm-12 col-md-3 col-lg-2 col-xl-2">
+        <p> {{ otp }} </p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-12 col-md-6 col-lg-3 col-xl-3">
+          <p>
+            <input type="submit" name="send" class="btn btn-primary" value="Confirm"
+                   style="width: 200px; font-weight: bold; background-color:#2e8b57; border-color: #095859;" />
+        </p>
+      </div>
+    </div>
+    <div class="row">
+    </div>
+  </form>
+
+  <p><a href="{% url 'logout' %}"> Logout </a></p>
+</div>
+{% endblock content %}
+
+{% block footer %}
+    {% include '../footer.html' %}
+{% endblock footer %}

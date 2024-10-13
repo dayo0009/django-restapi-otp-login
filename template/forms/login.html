@@ -1,0 +1,50 @@
+{% extends '../template.html' %}
+{% block title %} Login Page  {% endblock title %}
+{% load rest_framework %}
+{% block header %}
+    {% include '../header.html' %}
+{% endblock header %}
+
+{% block content %}
+<div class="container">
+  <div class="row">
+      <p></p>
+    <h4> Login </h4>
+  </div>
+   <div class="row">
+      {% include '../message/messages.html' %}
+  </div>
+  <form method="POST" action="" autocomplete="off">
+    {% csrf_token %}
+    <div class="row">
+      <div class="col-sm-12 col-md-6 col-lg-3 col-xl-3">
+        <p> {% render_form user %} </p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-12 col-md-6 col-lg-3 col-xl-3">
+          <p>
+            <input type="submit" name="register" class="btn btn-primary" value="Next"
+                   style="width: 303px; font-weight: bold; background-color:#008066; border-color: #008066;" />
+        </p>
+      </div>
+    </div>
+    <div class="row">
+      <p><a href="{% url 'password_reset' %}" style="text-decoration: none; color: #008066">
+          Forget password?
+      </a></p>
+
+    </div>
+  </form>
+  <p>Join the train of evolving rewards &nbsp;
+      <a href="{% url 'register' %}" style="text-decoration: none; color: #008066">
+    Register </a> </p>
+
+</div>
+
+
+{% endblock content %}
+
+{% block footer %}
+    {% include '../footer.html' %}
+{% endblock footer %}

@@ -1,0 +1,14 @@
+span.trademark {
+    position: relative;
+    left: -3.9rem;
+    top: -1.1rem;
+    color: #008066;
+}
+
+.slogan {
+    font-size: 9px;
+}
+
+p a {
+ text-decoration: none;
+}

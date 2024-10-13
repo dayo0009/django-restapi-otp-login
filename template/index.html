@@ -1,0 +1,20 @@
+{% extends "template.html" %}
+{% block title %} Badiiu Homepage {% endblock title %}
+
+{% block header %}
+    {% include 'header.html' %}
+{% endblock header %}
+
+{% block section %}
+    {% include 'section_break_div.html' %}
+{% endblock section %}
+
+{% block content %}
+    {% include 'products_div/phone_accessories.html' %}
+    <br><hr>
+    {% include 'products_div/clothing.html' %}
+{% endblock content %}
+
+{% block footer %}
+    {% include 'footer.html' %}
+{% endblock footer %}
