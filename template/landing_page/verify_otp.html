@@ -15,6 +15,13 @@
      <ul>
       <li> The process is to ensure your account is not compromised </li>
     </ul>
+       <div class="col-sm-12 col-md-10 col-lg-8 col-xl-10">
+           <p id="timing"> Time Remaining:
+               <span id="countdown-timer" style="font-size: 20px; font-weight: bold; color: #ba3030">
+                   {{ max_time_given }}
+               </span>
+           </p>
+       </div>
    </div>
     <p></p>
   </div>
@@ -27,12 +34,13 @@
     <div class="row" style="text-align: center">
       <div class="col-sm-12 col-md-3 col-lg-2 col-xl-2">
         <p> {{ otp }} </p>
+          <input type="hidden" name="otp_id" value="{{ otp_id }}" />
       </div>
     </div>
     <div class="row">
       <div class="col-sm-12 col-md-6 col-lg-3 col-xl-3">
           <p>
-            <input type="submit" name="send" class="btn btn-primary" value="Confirm"
+            <input type="submit" name="send" id="submit" class="btn btn-primary" value="Confirm"
                    style="width: 200px; font-weight: bold; background-color:#2e8b57; border-color: #095859;" />
         </p>
       </div>
@@ -43,6 +51,41 @@
 
   <p><a href="{% url 'logout' %}"> Logout </a></p>
 </div>
+<script>
+    'use strict';
+    function _($id) {
+        return document.getElementById($id);
+    }
+
+    function updateCountdownTimer() {
+        let timer = parseInt(_("countdown-timer").textContent);
+        const otp_form = _("otp-form");
+        const submit_button = _("submit");
+        let diff = timer - 1
+        if (timer <= 0) {
+            _("timing").innerHTML = "Expired! Wait For 45 seconds";
+            disableForm();
+            setTimeout(function() {
+                enableForm();
+                location.reload();
+            }, 45000);
+        }
+         function disableForm() {
+            otp_form.disabled = true;
+            submit_button.disabled = true;
+        }
+        function enableForm() {
+            otp_form.disabled = false;
+            submit_button.disabled = false;
+        }
+        // update timer decrement
+        _("countdown-timer").textContent = diff;
+    }
+    // Update the time every second
+    setInterval(updateCountdownTimer, 1000);
+
+</script>
+
 {% endblock content %}
 
 {% block footer %}
