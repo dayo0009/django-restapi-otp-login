@@ -63,29 +63,25 @@ class OTPVerification(View):
                     logout(request)
                     messages.info(request, f"Maximum attempt exceeded!!!")
                     return redirect('login')
-            elif otp:
-                email = request.session['email']
-                fetch_table_name = get_retail_table_with_contain_email(email)
-                man_table_name = get_man_table_with_contain_email(email)
-                single_table_name = get_single_table_with_contain_email(email)
-                query = LoginOtp.objects.get(otp=otp)
-                if fetch_table_name:
-                    if query:
-                        query.is_active = 1
-                        query.otp_max_try = int(query.otp_max_try) - 1
-                        query.save()
-                        return redirect('retailer-dashboard')
-                elif man_table_name:
-                    if query:
-                        query.is_active = 1
-                        query.otp_max_try = int(query.otp_max_try) - 1
-                        query.save()
-                        return redirect('manufacturer-dashboard')
-                elif single_table_name:
-                    if query:
-                        query.is_active = 1
-                        query.otp_max_try = int(query.otp_max_try) - 1
-                        query.save()
-                        return redirect('user-dashboard')
-
+                elif otp:
+                    invalid_otp_or_id = form.get_otp_by_id(otp, int_otp_id)
+                    if invalid_otp_or_id:
+                    	messages.error(request, "code already been used or expired")
+                    	return redirect('otp_page')
+            	    else:
+                    	email = request.session['email']
+                    	query = LoginOtp.objects.get(Q(otp=otp) & Q(id=int_otp_id))
+                    	if query:
+                    		query.is_active = 1
+                    		query.otp_max_try = int(query.otp_max_try) - 1
+                    		query.save()
+                    		man_table_name = get_man_table_with_contain_email(email)
+                    		single_table_name = get_single_table_with_contain_email(email)
+                    		fetch_table_name = get_retail_table_with_contain_email(email)
+                    		if fetch_table_name:
+                        		return redirect('retailer-dashboard')
+                    		elif man_table_name:
+                        		return redirect('manufacturer-dashboard')
+                    		elif single_table_name:
+                        		return redirect('user-dashboard')
 

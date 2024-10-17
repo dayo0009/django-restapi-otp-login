@@ -31,4 +31,13 @@ class VerifyForm(forms.Form):
             return res
         except exceptions.ObjectDoesNotExist as err:
             return err
+            
+    
+    @staticmethod
+    def get_otp_by_id(otp, int_otp_id):
+        try:
+            LoginOtp.objects.get(Q(otp=otp) & Q(id=int_otp_id))
+        except exceptions.ObjectDoesNotExist as err:
+            return err
+        return False
 
